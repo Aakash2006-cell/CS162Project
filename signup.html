@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Signup</title>
+  <title>Sign Up</title>
   <style>
     body {
       margin: 0;
@@ -15,42 +15,34 @@
       justify-content: center;
       align-items: center;
     }
-
     .container {
-      background-color: #252526;
+      background-color: #f4f4f9;
       padding: 40px;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      width: 300px;
-      animation: slideIn 0.6s ease;
-    }
-
-    @keyframes slideIn {
-      from {transform: translateY(30px); opacity: 0;}
-      to {transform: translateY(0); opacity: 1;}
-    }
-
-    h2 {
       text-align: center;
-      color: #fff;
-      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(15, 14, 14, 0.4);
+      width: 300px;
+      animation: fadeIn 0.5s ease-in;
     }
-
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
+    }
+    h2 { text-align: center; color: #fff; margin-bottom: 20px; }
     input {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
       border: none;
       border-radius: 8px;
-      background-color: #1e1e1e;
+      background-color: #120f0f;
       color: white;
       font-size: 14px;
     }
-
     button {
       width: 100%;
       padding: 10px;
-      background-color: #00c853;
+      background-color: #007acc;
       color: white;
       border: none;
       border-radius: 8px;
@@ -58,50 +50,40 @@
       margin-top: 10px;
       cursor: pointer;
     }
-
-    button:hover {
-      background-color: #00a045;
-    }
-
-    p {
-      color: white;
-      text-align: center;
-      margin-top: 15px;
-    }
-
-    a {
-      color: #00bfff;
-      text-decoration: none;
-    }
+    button:hover { background-color: #005a9e; }
+    p { color: white; text-align: center; margin-top: 15px; }
+    a { color: #00bfff; text-decoration: none; }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <h2>Sign Up</h2>
-    <input type="text" id="signupUsername" placeholder="Choose a username">
-    <input type="password" id="signupPassword" placeholder="Choose a password">
-    <button onclick="signup()">Sign Up</button>
-    <p>Already have an account? <a href="login.html">Login here</a></p>
+    <h1>Register</h1>
+    <form id="registerForm">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="password" id="confirmPassword" placeholder="Re-enter Password" required />
+      <button type="submit">Register</button>
+    </form>
   </div>
 
   <script>
-    function signup() {
-      const username = document.getElementById("signupUsername").value.trim();
-      const password = document.getElementById("signupPassword").value.trim();
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-      if (username && password) {
-        localStorage.setItem("registeredUser", username);
-        localStorage.setItem("registeredPass", password);
-        localStorage.setItem("loggedInUser", username); 
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
 
-        alert("Signup successful! Redirecting to Code Snippet Manager...");
-        window.location.href = "Finalproject.html";
-      } else {
-        alert("Please enter both username and password.");
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
       }
-    }
-  </script>
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password);
 
+      alert("Registration successful!");
+      window.location.href = "Finallogin.html";
+    });
+  </script>
 </body>
 </html>
