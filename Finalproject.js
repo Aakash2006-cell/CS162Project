@@ -87,3 +87,7 @@ function runSnippet() {
         output.textContent = "HTML output shown above.";
     }
 }
+function newFile() {
+    document.getElementById("snippetTitle").value = "";
+    editor.setValue("");
+}
